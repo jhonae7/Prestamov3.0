@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="twEncabezado" type="id" />
+    <item name="twSubEncabezado" type="id" />
+    <item name="twNombre" type="id" />
+    <item name="edNombre" type="id" />
+    <item name="twApellido" type="id" />
+    <item name="twSexo" type="id" />
+    <item name="edApellido" type="id" />
+    <item name="spSexo" type="id" />
+    <item name="twTelefono" type="id" />
+    <item name="edCedula" type="id" />
+    <item name="twCedula" type="id" />
+    <item name="twOcupacion" type="id" />
+    <item name="edDireccion" type="id" />
+    <item name="edOcupacion" type="id" />
+    <item name="twDireccion" type="id" />
+    <item name="twEncabezado2" type="id" />
+    <item name="twSubEncabezado2" type="id" />
+    <item name="twPlazo" type="id" />
+    <item name="twMontoCredito" type="id" />
+    <item name="etMontoCredito" type="id" />
+    <item name="twInteres" type="id" />
+    <item name="spInteres" type="id" />
+    <item name="twFecha" type="id" />
+    <item name="etFecha" type="id" />
+    <item name="twFechaFinal" type="id" />
+    <item name="etFechaFinal" type="id" />
+    <item name="twMontoPagar" type="id" />
+    <item name="twMontoCuota" type="id" />
+    <item name="twMontoPagar1" type="id" />
+    <item name="twMontoCuota1" type="id" />
+</resources>
