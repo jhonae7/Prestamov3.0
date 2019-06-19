@@ -1,7 +1,7 @@
 #Internal package file, do not edit.
-#Thu May 23 21:19:26 CST 2019
+#Thu Jun 13 11:32:59 CST 2019
 0.baseType=DIRECTORY
-0.base=C\:\\Users\\Admin\\Desktop\\Prestamov3.0\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+0.base=C\:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
 0.path=classes.dex
 0.set=DEX
 count=1

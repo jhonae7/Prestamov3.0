@@ -1,6 +1,8 @@
 package com.example.prestamo;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,14 +11,25 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 public class MainActivity extends AppCompatActivity {
     private EditText Nombre, Telefono, Cedula, Direccion, Apellido, Ocupacion;
     private Spinner Sexo;
-
+    DBclass dBclass;
+    int id = 0;
+    int pos = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dBclass = Room.databaseBuilder(this, DBclass.class, "db").allowMainThreadQueries().build();
+        Bundle bundle = getIntent().getExtras();
+        //id = bundle.getInt("ID");
+        //pos = bundle.getInt("posicion");
+        if(id!=0){
+            update(id);
+        }
         Nombre = findViewById(R.id.edNombre);
         Apellido = findViewById(R.id.edApellido);
         Sexo = findViewById(R.id.spSexo);
@@ -65,7 +78,11 @@ public class MainActivity extends AppCompatActivity {
                     cliente.ocupacion = ocupacion;
                     cliente.direccion = direccion;
                     Intent intent = new Intent();
-                    intent.putExtra("cliente", cliente);
+
+                    Long id=dBclass.clientesDao().insertar(cliente);
+                    cliente.setId_Cliente(id.intValue());
+                    intent.putExtra("posicion", pos);
+                    intent.putExtra("cliente", (Serializable) cliente);
                     setResult(RESULT_OK, intent);
                     finish();
                 }
@@ -79,5 +96,28 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void update(int id){
+        Cliente edit = new Cliente();
+        edit = dBclass.clientesDao().ObtenerCliente(id);
+        Nombre = findViewById(R.id.edNombre);
+        Nombre.setText(edit.getNombre());
+        Apellido = findViewById(R.id.edApellido);
+        Apellido.setText(edit.getApellido());
+        Sexo = findViewById(R.id.spSexo);
+        if(edit.getSexo() == "Masculino"){
+            Sexo.setSelection(0);
+        }
+        else{
+            Sexo.setSelection(1);
+        }
+        Telefono = findViewById(R.id.edTelefono);
+        Telefono.setText(edit.getTelefono());
+        Cedula = findViewById(R.id.edCedula);
+        Cedula.setText(edit.getCedula());
+        Ocupacion = findViewById(R.id.edOcupacion);
+        Ocupacion.setText(edit.getOcupacion());
+        Direccion = findViewById(R.id.edDireccion);
+        Direccion.setText(edit.getDireccion());
     }
 }

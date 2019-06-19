@@ -11,9 +11,41 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ClienteViewHolder> {
+class RVAdapter extends RecyclerView.Adapter<RVAdapter.ClienteViewHolder> implements View.OnClickListener {
 
-    public class ClienteViewHolder extends RecyclerView.ViewHolder {
+    private OnItemClickListener onItemClickListener;
+    private OnClickDeleteItemListener onClickDeleteItemListener;
+    private OnClickEditItemListener onClickEditItemListener;
+    private List<ClienteConPrestamo> clientes;
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    public interface OnItemClickListener{
+        void onItemClickListener(Cliente cliente, int pos);
+    }
+    public interface OnClickDeleteItemListener{
+        void onClickDeleteItemListener(Cliente cliente, int pos);
+    }
+    public interface OnClickEditItemListener {
+        void onClickEditItemlistener(Cliente cliente, int pos);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+    public void setOnClickDeleteItemListener(OnClickDeleteItemListener onClickDeleteItemListener){
+        this.onClickDeleteItemListener = onClickDeleteItemListener;
+    }
+    public void setOnClickEditListener(OnClickEditItemListener onClickEditItemListener){
+        this.onClickEditItemListener = onClickEditItemListener;
+    }
+    RVAdapter(List<ClienteConPrestamo> clientes){
+        this.clientes = clientes;
+    }
+    public class ClienteViewHolder extends RecyclerView.ViewHolder{
 
         public TextView itemNombre;
         public TextView itemApellido;
@@ -26,28 +58,43 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ClienteViewHolder>
             cvClientes = itemView.findViewById(R.id.cvClientes);
             itemNombre = itemView.findViewById(R.id.itemNombre);
             itemApellido = itemView.findViewById(R.id.itemApellido);
-            imBorrar = itemView.findViewById(R.id.imEditar);
-            imEditar = itemView.findViewById(R.id.imBorrar);
+            imBorrar = itemView.findViewById(R.id.imBorrar);
+            imEditar = itemView.findViewById(R.id.imEditar);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClickListener(clientes.get(getAdapterPosition()).getCliente(), getAdapterPosition());
+                }
+            });
+            imBorrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickDeleteItemListener.onClickDeleteItemListener(clientes.get(getAdapterPosition()).getCliente(), getAdapterPosition());
+                }
+            });
+            imEditar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickEditItemListener.onClickEditItemlistener(clientes.get(getAdapterPosition()).getCliente(), getAdapterPosition());
+                }
+            });
         }
-    }
-    List<Cliente> clientes;
-    RVAdapter (List<Cliente> clientes){
-        this.clientes = clientes;
     }
 
     @NonNull
     @Override
     public ClienteViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_cliente, viewGroup, false);
+        v.setOnClickListener(this);
         ClienteViewHolder clienteViewHolder = new ClienteViewHolder(v);
         return clienteViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClienteViewHolder clienteViewHolder, int i) {
-        clienteViewHolder.itemNombre.setText(clientes.get(i).nombre);
-        clienteViewHolder.itemApellido.setText(clientes.get(i).apellido);
+        clienteViewHolder.itemNombre.setText(clientes.get(i).getCliente().nombre);
+        clienteViewHolder.itemApellido.setText(clientes.get(i).getCliente().apellido);
     }
 
     @Override
@@ -59,4 +106,5 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ClienteViewHolder>
     public int getItemCount() {
         return clientes.size();
     }
+
 }

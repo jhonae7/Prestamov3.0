@@ -1,5 +1,6 @@
 package com.example.prestamo;
 
+import android.arch.persistence.room.Room;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -20,13 +21,15 @@ import java.util.List;
 public class PrincipalActivity extends AppCompatActivity {
 
     public TextView Actividades;
-    public static List<Cliente> listaClientes = new ArrayList<>();
-    public static List<Prestamo> listaPrestamos = new ArrayList<>();
+    public static List<ClienteConPrestamo> listaClientes = new ArrayList<>();
+    public static List<PrestamoConCliente> listaPrestamos = new ArrayList<>();
+    public DBclass dBclass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        dBclass = Room.databaseBuilder(this, DBclass.class, "db").allowMainThreadQueries().build();
         Actividades = findViewById(R.id.tvActividades);
     }
 
@@ -45,8 +48,8 @@ public class PrincipalActivity extends AppCompatActivity {
                 break;
             case R.id.mnVerCliente:
                 Intent intent2 = new Intent(this, ListaClientes.class);
-                intent2.putExtra("clientes", (Serializable) listaClientes);
-                startActivity(intent2);
+                //intent2.putExtra("clientes", (Serializable) listaClientes);
+                startActivityForResult(intent2, 2222);
                 break;
             case R.id.mnNuevoCliente:
                 Intent intent = new Intent(this, MainActivity.class);
@@ -72,13 +75,17 @@ public class PrincipalActivity extends AppCompatActivity {
             }
             else {
                 Cliente cliente = (Cliente) data.getExtras().getSerializable("cliente");
-                listaClientes.add(cliente);
-                Actividades.append("Ingreso a cliente " + cliente.nombre + "\n" );
+                ClienteConPrestamo clienteConPrestamo = new ClienteConPrestamo();
+                clienteConPrestamo.setCliente(cliente);
+                listaClientes.add(clienteConPrestamo);
+//                Long id = dBclass.clientesDao().insertar(cliente);
+//                cliente.setId(id.intValue());
+                //Actividades.append("Ingreso a cliente " + cliente.nombre + "\n" );
                 registerForContextMenu(Actividades);
             }
         }
-        //if(requestCode==2222)
-        else{
+        if(requestCode==2222)
+        {
             if (resultCode==0){
                 Actividades.append("Cancelo ingreso de prestamo\n");
                 registerForContextMenu(Actividades);
@@ -86,7 +93,11 @@ public class PrincipalActivity extends AppCompatActivity {
             else
             {
                 Prestamo prestamo = (Prestamo) data.getExtras().getSerializable("prestamo");
-                listaPrestamos.add(prestamo);
+                PrestamoConCliente prestamoConCliente = new PrestamoConCliente();
+                prestamoConCliente.setPrestamo(prestamo);
+                listaPrestamos.add(prestamoConCliente);
+                /*Long id = dBclass.prestamosDao().insertar(prestamo);
+                prestamo.setId(id.intValue());*/
                 Actividades.append("Ingreso de nuevo prestamo\n");
                 registerForContextMenu(Actividades);
             }

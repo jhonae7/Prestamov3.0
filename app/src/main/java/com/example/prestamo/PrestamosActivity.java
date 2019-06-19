@@ -52,7 +52,7 @@ public class PrestamosActivity extends AppCompatActivity {
         });
     }
     public void Prestamos(int n){
-        Prestamo item = PrincipalActivity.listaPrestamos.get(n);
+        Prestamo item = (Prestamo) PrincipalActivity.listaPrestamos;
         Cliente.setText(item.cliente);
         MontoCredito.setText(item.monto_credito);
         Interes.setText(item.interes);

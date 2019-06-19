@@ -1,8 +1,21 @@
 package com.example.prestamo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+import static android.arch.persistence.room.ForeignKey.RESTRICT;
+
+@Entity (tableName = "PrestamosTb")
 public class Prestamo implements Serializable {
+    @PrimaryKey (autoGenerate = true)
+    private int id;
+
+    @ForeignKey(entity = Cliente.class, parentColumns = "id", childColumns = "id_Cliente", onDelete = CASCADE, onUpdate = RESTRICT)
+    public int ID_CLIENTE;
     String cliente;
     String monto_credito;
     String interes;
@@ -20,6 +33,14 @@ public class Prestamo implements Serializable {
         this.fecha_final = "";
         this.monto_pagar = "";
         this.monto_cuota = "";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCliente() {

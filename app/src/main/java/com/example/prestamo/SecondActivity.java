@@ -1,5 +1,6 @@
 package com.example.prestamo;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,10 +29,12 @@ public class SecondActivity extends AppCompatActivity {
     private Spinner Interes;
     public Spinner spClientes;
     public static List<String> clientes =new ArrayList<>();
+    private DBclass dBclass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+        dBclass =  Room.databaseBuilder(this, DBclass.class, "db").allowMainThreadQueries().build();
         String fecha = new SimpleDateFormat("d/M/yyyy").format(new Date());
         FechaActual = findViewById(R.id.etFecha);
         FechaFinal = findViewById(R.id.etFechaFinal);
@@ -132,7 +135,7 @@ public class SecondActivity extends AppCompatActivity {
     }
     public void Clientes(){
         for (int n=0; n<PrincipalActivity.listaClientes.size(); n++){
-            String item = PrincipalActivity.listaClientes.get(n).nombre + " " + PrincipalActivity.listaClientes.get(n).apellido;
+            String item = PrincipalActivity.listaClientes.get(n).getCliente().nombre + " " + PrincipalActivity.listaClientes.get(n).getCliente().apellido;
             clientes.add(item);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, clientes);
@@ -166,6 +169,8 @@ public class SecondActivity extends AppCompatActivity {
                 prestamo.monto_pagar = monto_pagar;
                 prestamo.monto_cuota = monto_cuota;
                 Intent intent = new Intent();
+                Long id = dBclass.prestamosDao().insertar(prestamo);
+                prestamo.setId(id.intValue());
                 intent.putExtra("prestamo", prestamo);
                 setResult(RESULT_OK, intent);
                 clientes.removeAll(clientes);

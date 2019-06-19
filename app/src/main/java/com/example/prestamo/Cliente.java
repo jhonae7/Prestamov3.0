@@ -1,8 +1,13 @@
 package com.example.prestamo;
 
-import java.io.Serializable;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+@Entity(tableName = "ClientesTB")
 public class Cliente implements Serializable {
+    @PrimaryKey (autoGenerate = true)
+    private int id_Cliente;
     String nombre;
     String apellido;
     String telefono;
@@ -18,6 +23,22 @@ public class Cliente implements Serializable {
         this.cedula = "";
         this.ocupacion = "";
         this.direccion = "";
+    }
+
+    /*public int getId() {
+        return id_Cliente;
+    }
+
+    public void setId(int id) {
+        this.id_Cliente = id_Cliente;
+    }*/
+
+    public int getId_Cliente() {
+        return id_Cliente;
+    }
+
+    public void setId_Cliente(int id_Cliente) {
+        this.id_Cliente = id_Cliente;
     }
 
     public String getNombre() {
