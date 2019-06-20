@@ -55,13 +55,9 @@ public class PrincipalActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivityForResult(intent, 1111);
                 break;
-            case R.id.mnNuevoPrestamo:
-                Intent intent1 = new Intent(this, SecondActivity.class);
-                startActivityForResult(intent1, 2222);
-                break;
             case R.id.mnVerPrestamos:
                 Intent intent3 = new Intent(this, ListaPrestamos.class);
-                startActivity(intent3);
+                startActivityForResult(intent3, 0000);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -69,40 +65,27 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode==1111){
-            if(requestCode==0) {
-                Actividades.append("Cancelo el ingreso de cliente\n");
-                registerForContextMenu(Actividades);
-            }
-            else {
+            if(requestCode!=0){
                 Cliente cliente = (Cliente) data.getExtras().getSerializable("cliente");
                 ClienteConPrestamo clienteConPrestamo = new ClienteConPrestamo();
                 clienteConPrestamo.setCliente(cliente);
                 listaClientes.add(clienteConPrestamo);
 //                Long id = dBclass.clientesDao().insertar(cliente);
 //                cliente.setId(id.intValue());
-                //Actividades.append("Ingreso a cliente " + cliente.nombre + "\n" );
-                registerForContextMenu(Actividades);
             }
         }
         if(requestCode==2222)
         {
-            if (resultCode==0){
-                Actividades.append("Cancelo ingreso de prestamo\n");
-                registerForContextMenu(Actividades);
-            }
-            else
+            if (resultCode!=0)
             {
                 Prestamo prestamo = (Prestamo) data.getExtras().getSerializable("prestamo");
                 PrestamoConCliente prestamoConCliente = new PrestamoConCliente();
                 prestamoConCliente.setPrestamo(prestamo);
                 listaPrestamos.add(prestamoConCliente);
-                /*Long id = dBclass.prestamosDao().insertar(prestamo);
-                prestamo.setId(id.intValue());*/
-                Actividades.append("Ingreso de nuevo prestamo\n");
-                registerForContextMenu(Actividades);
+                Long id = dBclass.prestamosDao().insertar(prestamo);
+                prestamo.setId(id.intValue());
             }
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
     @Override

@@ -51,7 +51,7 @@ public class ClienteActivity extends AppCompatActivity {
             case R.id.mnAgregar:
                 Intent intent = new Intent(ClienteActivity.this, SecondActivity.class);
                 intent.putExtra("cliente", cliente);
-                startActivityForResult(intent, 1234);
+                startActivityForResult(intent, 5555);
                 Toast.makeText(this, "Nuevo Prestamo", Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -60,7 +60,7 @@ public class ClienteActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==1234){
+        if(requestCode==5555){
             if(requestCode!=0){
                 Prestamo prestamo = (Prestamo) data.getExtras().getSerializable("prestamo");
                 Intent intent = new Intent();

@@ -24,22 +24,24 @@ import java.util.Date;
 import java.util.List;
 
 public class SecondActivity extends AppCompatActivity {
-    private TextView MontoCuota, MontoPagar;
+    private TextView MontoCuota, MontoPagar, ClienteNombre;
     private EditText MontoCredito, Plazo, FechaActual, FechaFinal;
     private Spinner Interes;
-    public Spinner spClientes;
-    public static List<String> clientes =new ArrayList<>();
+    //public static List<String> clientes =new ArrayList<>();
     private DBclass dBclass;
+    private Cliente cliente;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        dBclass =  Room.databaseBuilder(this, DBclass.class, "db").allowMainThreadQueries().build();
+        //dBclass =  Room.databaseBuilder(this, DBclass.class, "db").allowMainThreadQueries().build();
+        Bundle bundle = getIntent().getExtras();
+        cliente = (Cliente) bundle.getSerializable("cliente");
         String fecha = new SimpleDateFormat("d/M/yyyy").format(new Date());
         FechaActual = findViewById(R.id.etFecha);
         FechaFinal = findViewById(R.id.etFechaFinal);
         FechaActual.setText(fecha);
-        spClientes = findViewById(R.id.spClientes);
+        ClienteNombre = findViewById(R.id.twClienteNombre);
         MontoCredito = findViewById(R.id.etMontoCredito);
         Interes = findViewById(R.id.spInteres);
         Plazo = findViewById(R.id.etPlazo);
@@ -47,7 +49,8 @@ public class SecondActivity extends AppCompatActivity {
         FechaFinal = findViewById(R.id.etFechaFinal);
         MontoPagar = findViewById(R.id.twMontoPagar1);
         MontoCuota = findViewById(R.id.twMontoCuota1);
-        Clientes();
+        ClienteNombre.setText(cliente.getNombre() + " " + cliente.getApellido());
+        //Clientes();
         Interes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -133,14 +136,14 @@ public class SecondActivity extends AppCompatActivity {
             FechaFinal.setText(String.valueOf(day)+"/"+String.valueOf(month)+"/"+String.valueOf(year));
         }
     }
-    public void Clientes(){
+    /*public void Clientes(){
         for (int n=0; n<PrincipalActivity.listaClientes.size(); n++){
             String item = PrincipalActivity.listaClientes.get(n).getCliente().nombre + " " + PrincipalActivity.listaClientes.get(n).getCliente().apellido;
             clientes.add(item);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, clientes);
         spClientes.setAdapter(adapter);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu2) {
@@ -151,7 +154,7 @@ public class SecondActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.mnGuardar:
-                String cliente = spClientes.getSelectedItem().toString();
+                String cliente = ClienteNombre.getText().toString();
                 String credito = MontoCredito.getText().toString();
                 String plazo = Plazo.getText().toString();
                 String interes = Interes.getSelectedItem().toString();
@@ -169,18 +172,17 @@ public class SecondActivity extends AppCompatActivity {
                 prestamo.monto_pagar = monto_pagar;
                 prestamo.monto_cuota = monto_cuota;
                 Intent intent = new Intent();
-                Long id = dBclass.prestamosDao().insertar(prestamo);
-                prestamo.setId(id.intValue());
+                /*Long id = dBclass.prestamosDao().insertar(prestamo);
+                prestamo.setId(id.intValue());*/
                 intent.putExtra("prestamo", prestamo);
                 setResult(RESULT_OK, intent);
-                clientes.removeAll(clientes);
+                //clientes.removeAll(clientes);
                 finish();
                 Toast.makeText(this, "Guardado", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.mnCancelar:
                 intent = new Intent();
                 setResult(RESULT_CANCELED, intent);
-                clientes.removeAll(clientes);
                 finish();
                 Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show();
         }

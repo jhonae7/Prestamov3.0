@@ -37,7 +37,7 @@ public class ListaClientes extends AppCompatActivity {
             @Override
             public void onClickDeleteItemListener(final Cliente cliente, final int pos) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListaClientes.this);
-                builder.setMessage("Desea Eliminar al cliente "+ cliente.getNombre() +"?");
+                builder.setMessage("Desea eliminar al cliente "+ cliente.getNombre() +"?");
                 builder.setNegativeButton("No", null);
                 builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
@@ -46,10 +46,13 @@ public class ListaClientes extends AppCompatActivity {
                         clientes.remove(cliente);
                         Toast.makeText(ListaClientes.this, "", Toast.LENGTH_SHORT).show();
                         rvAdapter.notifyItemRemoved(pos);
+                        rvAdapter.notifyDataSetChanged();
+
                     }
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+                rvAdapter.notifyDataSetChanged();
             }
         });
         rvAdapter.setOnItemClickListener(new RVAdapter.OnItemClickListener() {
@@ -74,6 +77,7 @@ public class ListaClientes extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvClientes.setLayoutManager(linearLayoutManager);
         rvClientes.setAdapter(rvAdapter);
+        rvAdapter.notifyDataSetChanged();
     }
 
     @Override

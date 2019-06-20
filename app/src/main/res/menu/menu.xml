@@ -21,12 +21,6 @@
         android:id="@+id/mnVerPrestamos"
         app:showAsAction="always"
         />
-    <item
-        android:title="Nuevo Prestamo"
-        android:icon="@drawable/add"
-        android:id="@+id/mnNuevoPrestamo"
-        app:showAsAction="always"
-        />
 
 
 

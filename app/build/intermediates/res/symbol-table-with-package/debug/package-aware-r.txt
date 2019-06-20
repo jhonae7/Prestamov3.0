@@ -795,7 +795,6 @@ id mnAgregar
 id mnCancelar
 id mnGuardar
 id mnNuevoCliente
-id mnNuevoPrestamo
 id mnVerCliente
 id mnVerPrestamos
 id multiply
@@ -835,7 +834,6 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
-id spClientes
 id spInteres
 id spSexo
 id spacer
@@ -855,6 +853,9 @@ id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id text
 id text2
+id textMonto
+id textNombre
+id textPlazo
 id textSpacerNoButtons
 id textSpacerNoTitle
 id time
@@ -874,6 +875,7 @@ id twCedulaE
 id twCliente
 id twClienteD
 id twClienteE
+id twClienteNombre
 id twDireccion
 id twDireccionD
 id twDireccionE
@@ -967,6 +969,7 @@ layout activity_prestamos
 layout activity_principal
 layout activity_second
 layout item_cliente
+layout item_prestamo
 layout notification_action
 layout notification_action_tombstone
 layout notification_template_custom_big

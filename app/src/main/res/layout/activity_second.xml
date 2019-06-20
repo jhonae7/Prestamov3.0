@@ -38,10 +38,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Monto de Crédito"
+        app:layout_constraintBottom_toTopOf="@+id/etMontoCredito"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spClientes" />
+        app:layout_constraintTop_toBottomOf="@+id/twClienteNombre" />
 
     <TextView
         android:id="@+id/twInteres"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toStartOf="@+id/twPlazo"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toEndOf="@+id/twMontoCreditoE"
-        app:layout_constraintTop_toBottomOf="@+id/spClientes" />
+        app:layout_constraintTop_toBottomOf="@+id/twClienteNombre" />
 
     <TextView
         android:id="@+id/twPlazo"
@@ -64,7 +64,7 @@
         android:layout_marginEnd="100dp"
         android:text="Plazo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spClientes" />
+        app:layout_constraintTop_toBottomOf="@+id/twClienteNombre" />
 
     <EditText
         android:id="@+id/etMontoCredito"
@@ -209,13 +209,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/twSubEncabezado2" />
 
-    <Spinner
-        android:id="@+id/spClientes"
-        android:layout_width="350dp"
+    <TextView
+        android:id="@+id/twClienteNombre"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/twMontoCreditoE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/twCliente" />
+
 </android.support.constraint.ConstraintLayout>
