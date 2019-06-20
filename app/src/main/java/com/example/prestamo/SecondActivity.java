@@ -30,6 +30,7 @@ public class SecondActivity extends AppCompatActivity {
     //public static List<String> clientes =new ArrayList<>();
     private DBclass dBclass;
     private Cliente cliente;
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class SecondActivity extends AppCompatActivity {
         MontoPagar = findViewById(R.id.twMontoPagar1);
         MontoCuota = findViewById(R.id.twMontoCuota1);
         ClienteNombre.setText(cliente.getNombre() + " " + cliente.getApellido());
+        id = cliente.getId_Cliente();
         //Clientes();
         Interes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -163,7 +165,9 @@ public class SecondActivity extends AppCompatActivity {
                 String monto_pagar = MontoPagar.getText().toString();
                 String monto_cuota = MontoCuota.getText().toString();
                 Prestamo prestamo = new Prestamo();
+                prestamo.setID_CLIENTE(id);
                 prestamo.cliente = cliente;
+                //prestamo.setId();
                 prestamo.monto_credito = credito;
                 prestamo.plazo = plazo;
                 prestamo.interes = interes;

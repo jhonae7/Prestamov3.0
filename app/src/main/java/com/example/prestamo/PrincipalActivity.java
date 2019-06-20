@@ -56,22 +56,28 @@ public class PrincipalActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1111);
                 break;
             case R.id.mnVerPrestamos:
-                Intent intent3 = new Intent(this, ListaPrestamos.class);
-                startActivityForResult(intent3, 0000);
+                /*Intent intent3 = new Intent(this, ListaPrestamos.class);
+                startActivityForResult(intent3, 0000);*/
+                Intent intent3 = new Intent(PrincipalActivity.this, ListaPrestamos.class);
+                startActivity(intent3);
+
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode==1111){
-            if(requestCode!=0){
+        if(requestCode==1111) {
+            if (requestCode == 0){
+                Toast.makeText(this, "No se han ingresado Clientes", Toast.LENGTH_SHORT).show();
+            }
+            else {
                 Cliente cliente = (Cliente) data.getExtras().getSerializable("cliente");
                 ClienteConPrestamo clienteConPrestamo = new ClienteConPrestamo();
                 clienteConPrestamo.setCliente(cliente);
                 listaClientes.add(clienteConPrestamo);
-//                Long id = dBclass.clientesDao().insertar(cliente);
-//                cliente.setId(id.intValue());
+                Long id = dBclass.clientesDao().insertar(cliente);
+                cliente.setId_Cliente(id.intValue());
             }
         }
         if(requestCode==2222)
@@ -83,7 +89,8 @@ public class PrincipalActivity extends AppCompatActivity {
                 prestamoConCliente.setPrestamo(prestamo);
                 listaPrestamos.add(prestamoConCliente);
                 Long id = dBclass.prestamosDao().insertar(prestamo);
-                prestamo.setId(id.intValue());
+                prestamo.setID_CLIENTE(id.intValue());
+                Toast.makeText(this, ""+prestamo.getMonto_credito(), Toast.LENGTH_SHORT).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

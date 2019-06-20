@@ -35,6 +35,14 @@ public class Prestamo implements Serializable {
         this.monto_cuota = "";
     }
 
+    public int getID_CLIENTE() {
+        return ID_CLIENTE;
+    }
+
+    public void setID_CLIENTE(int ID_CLIENTE) {
+        this.ID_CLIENTE = ID_CLIENTE;
+    }
+
     public int getId() {
         return id;
     }

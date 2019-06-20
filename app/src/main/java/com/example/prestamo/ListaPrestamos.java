@@ -26,17 +26,17 @@ public class ListaPrestamos extends AppCompatActivity {
         dBclass = Room.databaseBuilder(this, DBclass.class, "db").allowMainThreadQueries().build();
         ListView lvPrestamos = (ListView) findViewById(R.id.lvprestamo);
         prestamoList.addAll(dBclass.prestamosDao().ObtenerPrestamos());
-        /*int i = prestamoList.size();
+        int i = prestamoList.size();
         if (i==0){
             Toast.makeText(this, "No se han realizado prestamos", Toast.LENGTH_SHORT).show();
         }
         else
-        {*/
+        {
                 adaptador = new Adaptador(prestamoList, this);
                 lvPrestamos.setAdapter(adaptador);
                 //lvPrestamos.getAdapter();
                 //arrayAdapter.notifyDataSetChanged();
 
-        //}
+        }
     }
 }

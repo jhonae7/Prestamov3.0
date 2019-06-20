@@ -3,6 +3,7 @@ package com.example.prestamo;
 import android.arch.persistence.room.Embedded;
 
 public class PrestamoConCliente {
+
     @Embedded
     private Cliente cliente;
 

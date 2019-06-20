@@ -45,9 +45,8 @@ public class ListaClientes extends AppCompatActivity {
                         dBclass.clientesDao().borrar(cliente);
                         clientes.remove(cliente);
                         Toast.makeText(ListaClientes.this, "", Toast.LENGTH_SHORT).show();
+                        clientes.remove(pos);
                         rvAdapter.notifyItemRemoved(pos);
-                        rvAdapter.notifyDataSetChanged();
-
                     }
                 });
                 AlertDialog dialog = builder.create();

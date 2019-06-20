@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         dBclass = Room.databaseBuilder(this, DBclass.class, "db").allowMainThreadQueries().build();
         Bundle bundle = getIntent().getExtras();
-        //id = bundle.getInt("ID");
-        //pos = bundle.getInt("posicion");
-        if(id!=0){
-            update(id);
+        if(bundle!=null){
+            id = bundle.getInt("ID");
+            pos = bundle.getInt("posicion");
+            if(id!=0){
+                update(id);
+            }
         }
         Nombre = findViewById(R.id.edNombre);
         Apellido = findViewById(R.id.edApellido);
@@ -77,10 +79,12 @@ public class MainActivity extends AppCompatActivity {
                     cliente.cedula = cedula;
                     cliente.ocupacion = ocupacion;
                     cliente.direccion = direccion;
+                    if (id!=0){
+                        cliente.setId_Cliente(id);
+                    }
                     Intent intent = new Intent();
-
-                    Long id=dBclass.clientesDao().insertar(cliente);
-                    cliente.setId_Cliente(id.intValue());
+                    /*Long id=dBclass.clientesDao().insertar(cliente);
+                    cliente.setId_Cliente(id.intValue());*/
                     intent.putExtra("posicion", pos);
                     intent.putExtra("cliente", (Serializable) cliente);
                     setResult(RESULT_OK, intent);
