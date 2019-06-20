@@ -2,11 +2,13 @@ package com.example.prestamo;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -34,9 +36,15 @@ public class ListaPrestamos extends AppCompatActivity {
         {
                 adaptador = new Adaptador(prestamoList, this);
                 lvPrestamos.setAdapter(adaptador);
-                //lvPrestamos.getAdapter();
-                //arrayAdapter.notifyDataSetChanged();
-
+                lvPrestamos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        PrestamoConCliente prestamoConCliente = prestamoList.get(position);
+                        Intent intent = new Intent(ListaPrestamos.this, PrestamosActivity.class);
+                        intent.putExtra("ID", prestamoConCliente);
+                        startActivityForResult(intent, 6666);
+                    }
+                });
         }
     }
 }

@@ -139,9 +139,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Fecha de Finalización"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/twFechaD" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/twFechaE"
+        app:layout_constraintTop_toBottomOf="@+id/twMontoCreditoD" />
 
     <TextView
         android:id="@+id/twFechaFinD"
@@ -149,72 +151,71 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/twFechaD"
         app:layout_constraintTop_toBottomOf="@+id/twFechaFin" />
 
     <TextView
-        android:id="@+id/twMontoPagarE"
+        android:id="@+id/twMonto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Monto a Pagar:"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twFechaD" />
+
+    <TextView
+        android:id="@+id/twMonto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/twMonto"
+        app:layout_constraintTop_toBottomOf="@+id/twFechaD" />
+
+    <TextView
+        android:id="@+id/twCuota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Cuota"
+        app:layout_constraintStart_toEndOf="@+id/twMonto2"
         app:layout_constraintTop_toBottomOf="@+id/twFechaFinD" />
 
     <TextView
-        android:id="@+id/twMontoCuotaE"
+        android:id="@+id/twCuota2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/twCuota"
+        app:layout_constraintTop_toBottomOf="@+id/twFechaFinD" />
+
+    <TextView
+        android:id="@+id/twEPagos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Monto por Cuota:"
+        android:layout_marginTop="16dp"
+        android:text="Pagos"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/twMontoPagarE" />
+        app:layout_constraintTop_toBottomOf="@+id/twMonto" />
 
-    <TextView
-        android:id="@+id/twMontoCuotaD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="22dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toEndOf="@+id/twMontoCuotaE"
-        app:layout_constraintTop_toBottomOf="@+id/twMontoPagarD" />
-
-    <Button
-        android:id="@+id/btSiguienteP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Siguiente"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/twMontoCuotaD" />
-
-    <Button
-        android:id="@+id/btAnteriorP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Anterior"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btSiguienteP"
-        app:layout_constraintTop_toBottomOf="@+id/twMontoCuotaD" />
-
-    <TextView
-        android:id="@+id/twMontoPagarD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ListView
+        android:id="@+id/ListPagos"
+        android:layout_width="384dp"
+        android:layout_height="387dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/twMontoPagarE"
-        app:layout_constraintTop_toBottomOf="@+id/twFechaFinD" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twEPagos" />
+
 </android.support.constraint.ConstraintLayout>

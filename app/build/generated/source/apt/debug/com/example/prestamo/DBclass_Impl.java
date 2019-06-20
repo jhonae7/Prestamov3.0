@@ -14,6 +14,8 @@ import android.arch.persistence.room.util.TableInfo.ForeignKey;
 import android.arch.persistence.room.util.TableInfo.Index;
 import com.example.prestamo.dao.ClientesDao;
 import com.example.prestamo.dao.ClientesDao_Impl;
+import com.example.prestamo.dao.PagosDao;
+import com.example.prestamo.dao.PagosDao_Impl;
 import com.example.prestamo.dao.PrestamosDao;
 import com.example.prestamo.dao.PrestamosDao_Impl;
 import java.lang.IllegalStateException;
@@ -29,6 +31,8 @@ public class DBclass_Impl extends DBclass {
 
   private volatile PrestamosDao _prestamosDao;
 
+  private volatile PagosDao _pagosDao;
+
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
@@ -36,14 +40,16 @@ public class DBclass_Impl extends DBclass {
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `ClientesTB` (`id_Cliente` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nombre` TEXT, `apellido` TEXT, `telefono` TEXT, `sexo` TEXT, `cedula` TEXT, `ocupacion` TEXT, `direccion` TEXT)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS `PrestamosTb` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ID_CLIENTE` INTEGER NOT NULL, `cliente` TEXT, `monto_credito` TEXT, `interes` TEXT, `plazo` TEXT, `fecha_actual` TEXT, `fecha_final` TEXT, `monto_pagar` TEXT, `monto_cuota` TEXT)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `Pagos` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_prestamo` INTEGER NOT NULL, `pagos` INTEGER NOT NULL)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"db5f388d64b60bdae35374da163235ea\")");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1a16118f54688f0a6c62745b2b0c60ce\")");
       }
 
       @Override
       public void dropAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("DROP TABLE IF EXISTS `ClientesTB`");
         _db.execSQL("DROP TABLE IF EXISTS `PrestamosTb`");
+        _db.execSQL("DROP TABLE IF EXISTS `Pagos`");
       }
 
       @Override
@@ -106,8 +112,21 @@ public class DBclass_Impl extends DBclass {
                   + " Expected:\n" + _infoPrestamosTb + "\n"
                   + " Found:\n" + _existingPrestamosTb);
         }
+        final HashMap<String, TableInfo.Column> _columnsPagos = new HashMap<String, TableInfo.Column>(3);
+        _columnsPagos.put("id", new TableInfo.Column("id", "INTEGER", true, 1));
+        _columnsPagos.put("id_prestamo", new TableInfo.Column("id_prestamo", "INTEGER", true, 0));
+        _columnsPagos.put("pagos", new TableInfo.Column("pagos", "INTEGER", true, 0));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysPagos = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesPagos = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoPagos = new TableInfo("Pagos", _columnsPagos, _foreignKeysPagos, _indicesPagos);
+        final TableInfo _existingPagos = TableInfo.read(_db, "Pagos");
+        if (! _infoPagos.equals(_existingPagos)) {
+          throw new IllegalStateException("Migration didn't properly handle Pagos(com.example.prestamo.Pagos).\n"
+                  + " Expected:\n" + _infoPagos + "\n"
+                  + " Found:\n" + _existingPagos);
+        }
       }
-    }, "db5f388d64b60bdae35374da163235ea", "561a2fb0805a50483b9a347fef979a9a");
+    }, "1a16118f54688f0a6c62745b2b0c60ce", "78d08ba04e926c864fe6135f679ddb0a");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -118,7 +137,7 @@ public class DBclass_Impl extends DBclass {
 
   @Override
   protected InvalidationTracker createInvalidationTracker() {
-    return new InvalidationTracker(this, "ClientesTB","PrestamosTb");
+    return new InvalidationTracker(this, "ClientesTB","PrestamosTb","Pagos");
   }
 
   @Override
@@ -129,6 +148,7 @@ public class DBclass_Impl extends DBclass {
       super.beginTransaction();
       _db.execSQL("DELETE FROM `ClientesTB`");
       _db.execSQL("DELETE FROM `PrestamosTb`");
+      _db.execSQL("DELETE FROM `Pagos`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -163,6 +183,20 @@ public class DBclass_Impl extends DBclass {
           _prestamosDao = new PrestamosDao_Impl(this);
         }
         return _prestamosDao;
+      }
+    }
+  }
+
+  @Override
+  public PagosDao pagosDao() {
+    if (_pagosDao != null) {
+      return _pagosDao;
+    } else {
+      synchronized(this) {
+        if(_pagosDao == null) {
+          _pagosDao = new PagosDao_Impl(this);
+        }
+        return _pagosDao;
       }
     }
   }
