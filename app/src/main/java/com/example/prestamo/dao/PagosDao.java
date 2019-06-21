@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface PagosDao {
     @Insert
-    long insertart(Pagos pagos);
+    long insertar(Pagos pagos);
     @Query("select * from Pagos where id_prestamo = :id")
     List<Pagos> ObtenerPagos(int id);
 }

@@ -791,6 +791,7 @@ id message
 id middle
 id mnAcerdade
 id mnAgregar
+id mnAgregarPago
 id mnCancelar
 id mnGuardar
 id mnNuevoCliente
@@ -875,7 +876,6 @@ id twCliente
 id twClienteD
 id twClienteE
 id twClienteNombre
-id twCuota
 id twCuota2
 id twDireccion
 id twDireccionD
@@ -891,6 +891,7 @@ id twFechaE
 id twFechaFin
 id twFechaFinD
 id twFechaFinal
+id twID
 id twInteres
 id twInteresD
 id twInteresE
@@ -909,6 +910,7 @@ id twNombreE
 id twOcupacion
 id twOcupacionD
 id twOcupacionE
+id twPago
 id twPlazo
 id twPlazoD
 id twPlazoE
@@ -969,6 +971,7 @@ layout activity_prestamos
 layout activity_principal
 layout activity_second
 layout item_cliente
+layout item_pago
 layout item_prestamo
 layout notification_action
 layout notification_action_tombstone
@@ -984,6 +987,7 @@ menu contextual
 menu menu
 menu menu2
 menu menu3
+menu menu4
 mipmap ic_launcher
 mipmap ic_launcher_round
 string abc_action_bar_home_description

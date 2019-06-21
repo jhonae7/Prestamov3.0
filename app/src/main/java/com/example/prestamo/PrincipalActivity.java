@@ -90,7 +90,6 @@ public class PrincipalActivity extends AppCompatActivity {
                 listaPrestamos.add(prestamoConCliente);
                 Long id = dBclass.prestamosDao().insertar(prestamo);
                 prestamo.setID_CLIENTE(id.intValue());
-                Toast.makeText(this, ""+prestamo.getMonto_credito(), Toast.LENGTH_SHORT).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

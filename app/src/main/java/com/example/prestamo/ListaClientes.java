@@ -44,7 +44,7 @@ public class ListaClientes extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dBclass.clientesDao().borrar(cliente);
                         clientes.remove(cliente);
-                        Toast.makeText(ListaClientes.this, "", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ListaClientes.this, "Eliminado", Toast.LENGTH_SHORT).show();
                         clientes.remove(pos);
                         rvAdapter.notifyItemRemoved(pos);
                     }

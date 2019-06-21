@@ -144,12 +144,12 @@
         "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\9379c0872ce6753fcd07fd52868b661f\\res\\layout-watch-v20\\abc_alert_dialog_button_bar_material.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_menu_hardkey_panel_mtrl_mult.9.png.flat",
-        "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\9379c0872ce6753fcd07fd52868b661f\\res\\drawable-mdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
-    },
-    {
         "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\layout_select_dialog_singlechoice_material.xml.flat",
         "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\9379c0872ce6753fcd07fd52868b661f\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_abc_menu_hardkey_panel_mtrl_mult.9.png.flat",
+        "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\9379c0872ce6753fcd07fd52868b661f\\res\\drawable-mdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
         "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_cancelar.png.flat",
@@ -244,6 +244,10 @@
         "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\e40c7cc56f704984c07063c36343f139\\res\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png"
     },
     {
+        "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu4.xml.flat",
+        "source": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\src\\main\\res\\menu\\menu4.xml"
+    },
+    {
         "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_prestamos.xml.flat",
         "source": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\src\\main\\res\\layout\\activity_prestamos.xml"
     },
@@ -292,12 +296,12 @@
         "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\9379c0872ce6753fcd07fd52868b661f\\res\\drawable\\tooltip_frame_light.xml"
     },
     {
-        "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
-    },
-    {
         "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_persona.xml.flat",
         "source": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\persona.xml"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
@@ -622,6 +626,10 @@
     {
         "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_add.png.flat",
         "source": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\add.png"
+    },
+    {
+        "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_pago.xml.flat",
+        "source": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\src\\main\\res\\layout\\item_pago.xml"
     },
     {
         "merged": "C:\\Users\\Admin\\Desktop\\Prestamo v3\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_btn_check_to_on_mtrl_015.png.flat",
